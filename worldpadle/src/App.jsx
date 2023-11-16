@@ -1,4 +1,7 @@
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.css'
+import { CartContainer } from './components/CartContainer/CartContainer'
 import { ItemCounter } from './components/ItemCounter/ItemCounter'
 import { ItemListContainer } from './components/ItemListContainer/ItemListContainer'
 import { NavBar } from './components/NavBar/NavBar'
@@ -9,13 +12,19 @@ function App() {
     console.log( "la cantidad seleccionada es:", cantidad)
   }
   return (
-    <>
+    <BrowserRouter>
     <div className="container" >
      <NavBar />
-     <ItemListContainer greeting="Bienvenido" />
+     <Routes>
+      <Route path='/' element={<ItemListContainer greeting="Bienvenido" />} />
+      <Route path='/cart' element={<CartContainer/>} />
+     
+     
+     
+     </Routes>
      <ItemCounter initial={1} stock={6} onAdd={onAdd} />
      </div>
-    </>
+     </BrowserRouter>
   )
 }
 
