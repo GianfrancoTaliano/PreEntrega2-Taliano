@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Filter } from "./Filter"
 
 const profuctFiltered = ({products , filterState , handleFilterChange}) => (
@@ -43,7 +44,9 @@ const profuctFiltered = ({products , filterState , handleFilterChange}) => (
               <button className="btn btn-primary">Comprar</button>
             </div>
             <div style={{ padding: "10px", textAlign: "center" }}>
+              <Link to= "/detalle" >
               <button className="btn btn-primary">Ver Detalle</button>
+              </Link>
             </div>
           </div>
         ))
@@ -83,7 +86,9 @@ const profuctFiltered = ({products , filterState , handleFilterChange}) => (
                 <button className="btn btn-primary">Comprar</button>
               </div>
               <div style={{ padding: "10px", textAlign: "center" }}>
+                <Link to={`/detalle/${product.id} `  } >
                 <button className="btn btn-primary">Ver Detalle</button>
+                </Link>
               </div>
             </div>
           ))}
