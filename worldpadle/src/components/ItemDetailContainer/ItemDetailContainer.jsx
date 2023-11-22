@@ -8,14 +8,16 @@ export const ItemDetailContainer = () => {
   const { pid } = useParams();
 
 
-  
-
-
   useEffect(() => {
     mFetch(pid)
       .then((res) => setProduct(res))
       .catch((err) => console.log(err));
   }, []); 
+
+  const onAdd = (cantidad) => {
+    console.log("la cantidad seleccionada es:", cantidad);
+  }
+
 
   return (
     <div className="row">
