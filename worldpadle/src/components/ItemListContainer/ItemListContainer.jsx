@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import {ItemListContainer} from './ItemListContainer'
 import { mFetch } from "../../helpers/mFetch"
 import { ItemList } from "./ItemList/ItemList"
 
@@ -25,9 +24,10 @@ export const ItemListContainer = ({greeting}) => {
 
 
     return (
-    
-          <ItemList productos={productos} />
-  
-    );
+      <div>
+        <h2> {greeting}</h2>
+        <ItemList productos={productos} />
+      </div>
+    ) 
   }
 

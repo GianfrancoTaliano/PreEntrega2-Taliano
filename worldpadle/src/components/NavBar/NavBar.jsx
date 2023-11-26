@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { CartWidget } from '../CartWidget/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -20,17 +19,17 @@ export const NavBar = () => {
             navbarScroll
           >
             
-            <NavLink to="/" className={( {isActive})=>isActive ?"btn btn-dark" : "btn" }> 
+            <NavLink   className={( {isActive})=>isActive ?"btn btn-dark" : "btn" } to="/"> 
               Home
             </NavLink>
            
-            <NavLink to="/paletas" className={( {isActive})=>isActive ?"btn btn-dark" : "btn" }> 
+            <NavLink  className={( {isActive})=>isActive ?"btn btn-dark" : "btn" } to="/category/paletas"> 
               Paletas
             </NavLink>
          
-            <Link to="/accesorios">
-              <Button variant="outline-light">Accesorios</Button>
-            </Link>
+            <NavLink  className={( {isActive})=>isActive ?"btn btn-dark" : "btn" } to="/category/accesorios">
+              Accesorios
+            </NavLink>
           </Nav>
           <Form className="d-flex">
            

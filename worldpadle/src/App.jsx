@@ -1,5 +1,5 @@
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route , Navigate} from 'react-router-dom'
 import './App.css'
 import { CartContainer } from './components/CartContainer/CartContainer'
 import { ItemCounter } from './components/ItemCounter/ItemCounter'
@@ -18,15 +18,15 @@ function App() {
      <NavBar />
      <Routes>
 
-
-      <Route path='/category/:cid' element={<ItemListContainer greeting="Bienvenido" />} />
-      <Route path='/cart' element={<CartContainer/>} />  
+      <Route path='/' element={<ItemListContainer greeting="Bienvenidos" />} />
+      <Route path='/category/:cid' element={<ItemListContainer greeting="Bienvenidos" />} />
       <Route path='/detalle/:pid' element={<ItemDetailContainer />} /> 
+      <Route path= '*' element={<Navigate to="/" />} /> 
 
 
      </Routes>
 
-     <ItemCounter initial={1} stock={6} onAdd={onAdd} />
+  
      </div>
      </BrowserRouter>
   )
