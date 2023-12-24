@@ -1,33 +1,52 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { mFetch } from "../../helpers/mFetch"
-import { ItemList } from "./ItemList/ItemList"
+import { ItemList } from './ItemList/ItemList'
+import { getDocs } from 'firebase/firestore'
+import { getFirestore, collection, query, where } from 'firebase/firestore'
+
+const Loading = () => {
+  return <h2>Cargando... </h2>
+}
+
+export const ItemListContainer = ({ greeting }) => {
+  const [productos, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const { cid } = useParams()
 
 
-export const ItemListContainer = ({greeting}) => {
-   const [productos , setProducts] = useState([])
+  useEffect(() => {
 
-   const {cid} = useParams()
+    const dbFirestore = getFirestore()
 
-    useEffect(() => {
-      if (cid) {
-        mFetch()
-          .then(result => setProducts(result.filter(product => product.category === cid)))
-          .catch(error => console.log(error))
-      }
-          else {
-        mFetch()
-          .then(result => setProducts(result))
-          .catch(error => console.log(error))
-      }
+    const queryCollection = collection(dbFirestore, 'products')
+    const queryItems = cid ? query(queryCollection, where('category', '==', cid)) : queryCollection
+
+
+      getDocs(queryItems)
+        .then((resp) => setProducts(resp.docs.map(producto => ({ id: producto.id, ...producto.data() }))))
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false))
     }, [cid])
 
+  return (
+    <div>
+      <h2> {greeting}</h2>
 
-    return (
-      <div>
-        <h2> {greeting}</h2>
+      {loading ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <Loading />
+        </div>
+      ) : (
         <ItemList productos={productos} />
-      </div>
-    ) 
-  }
-
+      )}
+    </div>
+  )
+}
